@@ -20,6 +20,18 @@ function recordRateLimit() {
   localStorage.setItem(RATE_LIMIT_KEY, String(Date.now()));
 }
 
+// Sanitize user input: trim, limit length, strip HTML
+const HTML_ESCAPE_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, ch => HTML_ESCAPE_MAP[ch]);
+}
+function sanitizeInput(raw, maxLen) {
+  let s = String(raw ?? '').trim();
+  if (s.length > maxLen) s = s.slice(0, maxLen);
+  return escapeHtml(s);
+}
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Contact({ c }) {
   const [form, setForm] = useState({name:'',email:'',msg:''});
   const [sent, setSent] = useState(false);
@@ -31,6 +43,16 @@ export default function Contact({ c }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.msg) return;
+
+    // Sanitize inputs
+    const cleanName  = sanitizeInput(form.name, 100);
+    const cleanEmail = sanitizeInput(form.email, 200);
+    const cleanMsg   = sanitizeInput(form.msg, 5000);
+    if (!cleanName || !cleanEmail || !cleanMsg) return;
+    if (!EMAIL_REGEX.test(cleanEmail)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
 
     // 1st party antibot checks
     if (honeypot.trim() !== '') {
@@ -56,11 +78,11 @@ export default function Contact({ c }) {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          name: form.name,
-          email: form.email,
-          message: form.msg,
-          subject: `Portfolio Contact from ${form.name}`,
-          reply_to: form.email,
+          name: cleanName,
+          email: cleanEmail,
+          message: cleanMsg,
+          subject: `Portfolio Contact from ${cleanName}`,
+          reply_to: cleanEmail,
         }),
       });
       const data = await res.json();

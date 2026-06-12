@@ -91,9 +91,9 @@ export const CONTENT = {
     contactTitle: "Let's Build Together",
     contactSub: "// open for strategic partnerships & consulting",
     links: [
-      { icon: "💼", label: "LinkedIn", href: "https://linkedin.com", sub: "/in/alamabybashit" },
-      { icon: "🐙", label: "GitHub", href: "https://github.com", sub: "/alamabybashit" },
-      { icon: "💬", label: "WhatsApp", href: "https://wa.me/628XXXXXXXXX", sub: "+62 8XX-XXXX-XXXX" },
+      { icon: "💼", label: "LinkedIn", href: "https://www.linkedin.com/in/alamaby/", sub: "/in/alamaby" },
+      { icon: "🐙", label: "GitHub", href: "https://github.com/alamaby", sub: "/alamaby" },
+      { icon: "💬", label: "WhatsApp", href: "https://wa.me/6281324498379", sub: "+62 813-2449-8379" },
     ],
     form: {
       name: "NAME",
@@ -201,9 +201,9 @@ export const CONTENT = {
     contactTitle: "Mari Berkolaborasi",
     contactSub: "// terbuka untuk kemitraan strategis & konsultasi",
     links: [
-      { icon: "💼", label: "LinkedIn", href: "https://linkedin.com", sub: "/in/alamabybashit" },
-      { icon: "🐙", label: "GitHub", href: "https://github.com", sub: "/alamabybashit" },
-      { icon: "💬", label: "WhatsApp", href: "https://wa.me/628XXXXXXXXX", sub: "+62 8XX-XXXX-XXXX" },
+      { icon: "💼", label: "LinkedIn", href: "https://www.linkedin.com/in/alamaby/", sub: "/in/alamaby" },
+      { icon: "🐙", label: "GitHub", href: "https://github.com/alamaby", sub: "/alamaby" },
+      { icon: "💬", label: "WhatsApp", href: "https://wa.me/6281324498379", sub: "+62 813-2449-8379" },
     ],
     form: {
       name: "NAMA",
